@@ -544,7 +544,10 @@
   }
 
   function generateAttemptId(suffix = "") {
-    const randomToken = Math.random().toString(16).slice(2, 8);
-    return `${Date.now()}-${randomToken}${suffix ? `-${suffix}` : ""}`;
+    const token =
+      window.crypto && typeof window.crypto.randomUUID === "function"
+        ? window.crypto.randomUUID()
+        : `${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
+    return `${token}${suffix ? `-${suffix}` : ""}`;
   }
 })();
