@@ -195,7 +195,7 @@
     }
 
     if (state.timer.mode === "work" && state.timer.status === "idle") {
-      const attemptId = `${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
+      const attemptId = generateAttemptId();
       state.attempts.push({
         id: attemptId,
         startedAt: new Date().toISOString(),
@@ -302,7 +302,7 @@
       activeAttempt.durationMinutes = state.settings.workMinutes;
     } else {
       state.attempts.push({
-        id: `${Date.now()}-recovered`,
+        id: generateAttemptId("recovered"),
         startedAt: completedAt,
         completedAt,
         durationMinutes: state.settings.workMinutes,
@@ -334,12 +334,13 @@
     const currentLevelXp = xp % XP_PER_LEVEL;
     const streak = calculateCurrentStreak(completedAttempts);
     const badgeStates = BADGES.map((badge) => ({ ...badge, unlocked: badge.isUnlocked({ weekly, monthly, streak, level }) }));
+    const nextLevelXp = currentLevelXp === 0 ? XP_PER_LEVEL : XP_PER_LEVEL - currentLevelXp;
 
     return {
       xp,
       level,
       currentLevelXp,
-      nextLevelXp: XP_PER_LEVEL - currentLevelXp || XP_PER_LEVEL,
+      nextLevelXp,
       streak,
       today: todaySummary,
       weekly,
@@ -434,9 +435,9 @@
     elements.streakValue.textContent = `${analytics.streak}日`;
     elements.todayCompletions.textContent = `${analytics.today.completedCount}回`;
     elements.todayFocus.textContent = `集中 ${formatMinutes(analytics.today.focusMinutes)}分`;
-    elements.weeklyRate.textContent = `${analytics.weekly.completionRate.toFixed(0)}%`;
+    elements.weeklyRate.textContent = formatPercentage(analytics.weekly.completionRate);
     elements.weeklyAverage.textContent = `平均集中 ${formatMinutes(analytics.weekly.averageFocusMinutes)}分`;
-    elements.monthlyRate.textContent = `${analytics.monthly.completionRate.toFixed(0)}%`;
+    elements.monthlyRate.textContent = formatPercentage(analytics.monthly.completionRate);
     elements.monthlyAverage.textContent = `平均集中 ${formatMinutes(analytics.monthly.averageFocusMinutes)}分`;
     elements.totalCompletions.textContent = `${analytics.totalCompleted}回`;
     elements.nextLevel.textContent = `次レベルまで ${analytics.nextLevelXp}XP`;
@@ -529,11 +530,21 @@
     return date.toISOString().slice(0, 10);
   }
 
+  function formatPercentage(value) {
+    return `${Math.round(value)}%`;
+  }
+
   function formatMinutes(value) {
-    return Number(value).toFixed(value >= 10 ? 0 : 1).replace(".0", "");
+    const rounded = value >= 10 ? Math.round(value) : Math.round(value * 10) / 10;
+    return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(1);
   }
 
   function minutesToSeconds(minutes) {
     return Math.max(1, Math.round(minutes * 60));
+  }
+
+  function generateAttemptId(suffix = "") {
+    const randomToken = Math.random().toString(16).slice(2, 8);
+    return `${Date.now()}-${randomToken}${suffix ? `-${suffix}` : ""}`;
   }
 })();
