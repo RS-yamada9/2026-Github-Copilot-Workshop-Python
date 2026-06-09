@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pomodoro Quest</title>
+  <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Pomodoro Quest</p>
+        <h1>集中を積み上げる、ゲーミフィケーション対応ポモドーロ</h1>
+        <p class="subcopy">
+          ポモドーロ完了でXPを獲得し、レベルアップ、バッジ、ストリーク、週間/月間統計で継続を可視化します。
+        </p>
+      </div>
+      <div class="hero-metrics">
+        <article class="metric-card accent">
+          <span>現在レベル</span>
+          <strong id="level-value">Lv.1</strong>
+          <small id="xp-value">0 XP</small>
+          <div class="progress-track">
+            <div id="xp-progress" class="progress-bar"></div>
+          </div>
+        </article>
+        <article class="metric-card">
+          <span>連続達成</span>
+          <strong id="streak-value">0日</strong>
+          <small>今日も集中を継続</small>
+        </article>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="panel timer-panel">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Timer</p>
+            <h2 id="mode-label">作業セッション</h2>
+          </div>
+          <span id="timer-status" class="status-chip">待機中</span>
+        </div>
+
+        <div class="timer-display">
+          <div class="timer-ring">
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+              <circle class="ring-base" cx="60" cy="60" r="52"></circle>
+              <circle id="progress-ring" class="ring-progress" cx="60" cy="60" r="52"></circle>
+            </svg>
+            <div class="timer-text">
+              <strong id="time-remaining">25:00</strong>
+              <span>残り時間</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings">
+          <label>
+            作業時間（分）
+            <input id="work-minutes" type="number" min="0.05" max="120" step="0.05" value="25">
+          </label>
+          <label>
+            休憩時間（分）
+            <input id="break-minutes" type="number" min="0.05" max="60" step="0.05" value="5">
+          </label>
+        </div>
+
+        <div class="button-row">
+          <button id="start-button" class="primary">開始</button>
+          <button id="pause-button">一時停止</button>
+          <button id="reset-button">リセット</button>
+        </div>
+
+        <p id="session-message" class="session-message">
+          1ポモドーロ完了ごとに25XPを獲得します。
+        </p>
+      </article>
+
+      <article class="panel">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Achievements</p>
+            <h2>獲得バッジ</h2>
+          </div>
+          <span id="badge-count" class="status-chip muted">0 / 5</span>
+        </div>
+        <div id="badge-list" class="badge-list"></div>
+      </article>
+    </section>
+
+    <section class="stats-grid">
+      <article class="panel stat-card">
+        <span>今日の完了数</span>
+        <strong id="today-completions">0回</strong>
+        <small id="today-focus">集中 0分</small>
+      </article>
+      <article class="panel stat-card">
+        <span>週間完了率</span>
+        <strong id="weekly-rate">0%</strong>
+        <small id="weekly-average">平均集中 0分</small>
+      </article>
+      <article class="panel stat-card">
+        <span>月間完了率</span>
+        <strong id="monthly-rate">0%</strong>
+        <small id="monthly-average">平均集中 0分</small>
+      </article>
+      <article class="panel stat-card">
+        <span>総完了ポモドーロ</span>
+        <strong id="total-completions">0回</strong>
+        <small id="next-level">次レベルまで 100XP</small>
+      </article>
+    </section>
+
+    <section class="grid chart-grid">
+      <article class="panel">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Weekly Analytics</p>
+            <h2>週間統計グラフ</h2>
+          </div>
+        </div>
+        <div id="weekly-chart" class="chart"></div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Monthly Analytics</p>
+            <h2>月間統計グラフ</h2>
+          </div>
+        </div>
+        <div id="monthly-chart" class="chart"></div>
+      </article>
+    </section>
+  </main>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
