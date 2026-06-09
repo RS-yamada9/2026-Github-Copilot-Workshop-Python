@@ -1,0 +1,382 @@
+:root {
+  color-scheme: light;
+  --bg: #f5f7fb;
+  --panel: #ffffff;
+  --panel-alt: #eef3ff;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --border: #dbe4ff;
+  --primary: #5b6cff;
+  --primary-dark: #3f4ad7;
+  --success: #0f9d58;
+  --warning: #ffb020;
+  --shadow: 0 20px 45px rgba(91, 108, 255, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: linear-gradient(180deg, #f8faff 0%, var(--bg) 100%);
+  color: var(--text);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 20px 64px;
+}
+
+.hero,
+.grid,
+.stats-grid {
+  display: grid;
+  gap: 20px;
+}
+
+.hero {
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
+  align-items: stretch;
+  margin-bottom: 24px;
+}
+
+.hero-metrics,
+.chart-grid {
+  display: grid;
+  gap: 20px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--primary);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  font-size: clamp(2rem, 3vw, 3.1rem);
+  margin-bottom: 16px;
+}
+
+.subcopy {
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 680px;
+}
+
+.panel,
+.metric-card {
+  background: var(--panel);
+  border: 1px solid rgba(91, 108, 255, 0.12);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.metric-card {
+  display: grid;
+  gap: 8px;
+}
+
+.metric-card strong {
+  font-size: 2rem;
+}
+
+.metric-card.accent {
+  background: linear-gradient(135deg, #eef2ff 0%, #ffffff 100%);
+}
+
+.progress-track {
+  width: 100%;
+  height: 10px;
+  background: rgba(91, 108, 255, 0.15);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), #8f9bff);
+  border-radius: inherit;
+}
+
+.grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: 20px;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: start;
+  margin-bottom: 20px;
+}
+
+.panel-header h2 {
+  margin-bottom: 0;
+}
+
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(91, 108, 255, 0.12);
+  color: var(--primary-dark);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.status-chip.muted {
+  background: rgba(107, 114, 128, 0.12);
+  color: var(--muted);
+}
+
+.timer-panel {
+  display: grid;
+  gap: 20px;
+}
+
+.timer-display {
+  display: flex;
+  justify-content: center;
+}
+
+.timer-ring {
+  position: relative;
+  width: 280px;
+  height: 280px;
+}
+
+.timer-ring svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.ring-base,
+.ring-progress {
+  fill: none;
+  stroke-width: 12;
+}
+
+.ring-base {
+  stroke: #e4e9ff;
+}
+
+.ring-progress {
+  stroke: var(--primary);
+  stroke-linecap: round;
+  stroke-dasharray: 327;
+  stroke-dashoffset: 327;
+  transition: stroke-dashoffset 0.4s ease;
+}
+
+.timer-text {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.timer-text strong {
+  display: block;
+  font-size: clamp(2.6rem, 5vw, 4rem);
+}
+
+.timer-text span,
+.session-message,
+.stat-card small {
+  color: var(--muted);
+}
+
+.settings,
+.button-row,
+.stats-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.settings {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.settings label,
+.stat-card span {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.settings input {
+  width: 100%;
+  margin-top: 8px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #fbfcff;
+}
+
+.button-row {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+button {
+  border: none;
+  border-radius: 14px;
+  padding: 14px 18px;
+  background: #edf1ff;
+  color: var(--primary-dark);
+  cursor: pointer;
+  font-weight: 700;
+}
+
+button:hover {
+  filter: brightness(0.98);
+}
+
+button.primary {
+  background: linear-gradient(90deg, var(--primary), #7c8cff);
+  color: white;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.badge-list {
+  display: grid;
+  gap: 12px;
+}
+
+.badge {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: #fbfcff;
+}
+
+.badge.unlocked {
+  background: linear-gradient(135deg, rgba(15, 157, 88, 0.12), rgba(255, 255, 255, 1));
+  border-color: rgba(15, 157, 88, 0.28);
+}
+
+.badge-icon {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: rgba(91, 108, 255, 0.12);
+  font-size: 1.35rem;
+}
+
+.badge.unlocked .badge-icon {
+  background: rgba(15, 157, 88, 0.16);
+}
+
+.badge strong,
+.stat-card strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.stats-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-bottom: 20px;
+}
+
+.stat-card strong {
+  font-size: 2rem;
+}
+
+.chart {
+  display: grid;
+  gap: 18px;
+  min-height: 240px;
+}
+
+.chart-bars {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(22px, 1fr));
+  gap: 12px;
+  align-items: end;
+  min-height: 180px;
+}
+
+.chart-bar {
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+}
+
+.chart-column {
+  width: 100%;
+  min-height: 8px;
+  border-radius: 999px 999px 8px 8px;
+  background: linear-gradient(180deg, #97a4ff 0%, var(--primary) 100%);
+}
+
+.chart-bar small {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.chart-legend {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+@media (max-width: 960px) {
+  .hero,
+  .grid,
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding-inline: 16px;
+  }
+
+  .settings,
+  .button-row {
+    grid-template-columns: 1fr;
+  }
+
+  .timer-ring {
+    width: 220px;
+    height: 220px;
+  }
+}
