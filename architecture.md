@@ -111,7 +111,7 @@
 
 ### 5.2 Domain（純粋ロジック）
 
-- 状態遷移: `idle/running/paused/break/finished`
+- 状態遷移: `idle/running/paused/onBreak/finished`
 - イベント: `start/pause/resume/reset/tick/complete`
 - ルール例:
   - `start` は `idle` または `paused` からのみ有効
