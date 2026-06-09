@@ -60,7 +60,7 @@ Flaskアプリとして開発を開始できる最小土台を用意する。
 
 ### 実装内容
 
-1. 状態定義（idle/running/paused/break/finished）
+1. 状態定義（idle/running/paused/onBreak/finished）
 2. 状態遷移reducer
 3. 残り時間計算
 4. 進捗集計
