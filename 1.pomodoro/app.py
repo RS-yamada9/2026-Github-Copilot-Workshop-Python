@@ -14,7 +14,7 @@ class PomodoroSettings:
     break_duration: int = 5
     theme: str = "light"
     sound: dict[str, bool] = field(
-        default_factory=lambda: {"start": True, "end": True, "tick": True}
+        default_factory=lambda: {sound_type: True for sound_type in ALLOWED_SOUND_TYPES}
     )
 
     def set_work_duration(self, minutes: int) -> None:
