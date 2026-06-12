@@ -6,6 +6,9 @@ from pathlib import Path
 def _load_app_module():
     repo_root = Path(__file__).resolve().parents[2]
     app_path = repo_root / "1.pomodoro" / "app.py"
+    if not app_path.exists():
+        raise FileNotFoundError(f"Pomodoro app module not found: {app_path}")
+    # ディレクトリ名にドットを含むため通常 import では読み込めない。
     spec = importlib.util.spec_from_file_location("pomodoro_app", app_path)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)

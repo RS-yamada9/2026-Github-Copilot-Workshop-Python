@@ -8,14 +8,16 @@ ALLOWED_THEMES = ("dark", "light", "focus")
 ALLOWED_SOUND_TYPES = ("start", "end", "tick")
 
 
+def _default_sound_settings(sound_types: tuple[str, ...] = ALLOWED_SOUND_TYPES) -> dict[str, bool]:
+    return {sound_type: True for sound_type in sound_types}
+
+
 @dataclass
 class PomodoroSettings:
     work_duration: int = 25
     break_duration: int = 5
     theme: str = "light"
-    sound: dict[str, bool] = field(
-        default_factory=lambda: {sound_type: True for sound_type in ALLOWED_SOUND_TYPES}
-    )
+    sound: dict[str, bool] = field(default_factory=_default_sound_settings)
 
     def set_work_duration(self, minutes: int) -> None:
         if minutes not in ALLOWED_WORK_DURATIONS:
