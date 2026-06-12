@@ -3,7 +3,7 @@ import unittest
 from pathlib import Path
 
 
-def _load_app_module():
+def load_app_module():
     app_path = None
     for candidate_root in Path(__file__).resolve().parents:
         candidate_app_path = candidate_root / "1.pomodoro" / "app.py"
@@ -19,7 +19,7 @@ def _load_app_module():
     return module
 
 
-app = _load_app_module()
+app = load_app_module()
 
 
 class PomodoroSettingsTest(unittest.TestCase):

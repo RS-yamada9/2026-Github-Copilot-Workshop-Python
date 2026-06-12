@@ -19,6 +19,13 @@ class PomodoroSettings:
     theme: str = "light"
     sound: dict[str, bool] = field(default_factory=_default_sound_settings)
 
+    def __post_init__(self) -> None:
+        self.set_work_duration(self.work_duration)
+        self.set_break_duration(self.break_duration)
+        self.set_theme(self.theme)
+        for sound_type, enabled in self.sound.items():
+            self.set_sound(sound_type, enabled)
+
     def set_work_duration(self, minutes: int) -> None:
         if minutes not in ALLOWED_WORK_DURATIONS:
             raise ValueError(f"Unsupported work duration: {minutes}")
