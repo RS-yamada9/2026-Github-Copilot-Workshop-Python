@@ -8,8 +8,8 @@ ALLOWED_THEMES = ("dark", "light", "focus")
 ALLOWED_SOUND_TYPES = ("start", "end", "tick")
 
 
-def _default_sound_settings(sound_types: tuple[str, ...] = ALLOWED_SOUND_TYPES) -> dict[str, bool]:
-    return {sound_type: True for sound_type in sound_types}
+def _default_sound_settings() -> dict[str, bool]:
+    return {sound_type: True for sound_type in ALLOWED_SOUND_TYPES}
 
 
 @dataclass
